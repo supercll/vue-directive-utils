@@ -1,28 +1,45 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <section>
+            <button
+                v-throttle:1000="{
+                    func: fn,
+                    params: [10, 20],
+                }"
+            >
+                节流测试
+            </button>
+            <button
+                v-debounce:1000="{
+                    func: fn,
+                    params: [10, 20],
+                }"
+            >
+                防抖测试
+            </button>
+            <button
+                v-debounce:1000.immediate="{
+                    func: fn,
+                    params: [10, 20],
+                }"
+            >
+                多次点击只执行第一次
+            </button>
+        </section>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: "App",
+    components: {},
+
+    methods: {
+        fn(...args) {
+            console.log("ok", args);
+        },
+    },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
